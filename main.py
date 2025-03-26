@@ -32,6 +32,7 @@ def append_letters():
     for ascii in range(65, 65 + 26):
         letter = chr(ascii)
         button = Gtk.Button(label=letter)
+        button.connect("clicked", on_clicked)
         button.add_css_class("pill")
         button.add_css_class("circular")
         flow_box.append(button)
@@ -78,6 +79,24 @@ def draw(_drawingarea, cr, width, height):
       cr.line_to(0.8 * width, 0.8 * height)
 
     cr.stroke()
+
+def on_clicked(button):
+    text = word.get_label()
+    guess = button.get_label()
+    deactivated_list.append(button)
+    button.set_sensitive(False)
+    correct = False
+    for i in range(len(secret)):
+        if secret[i] == guess:
+            correct = True
+            text = text[:i] + guess + text[i + 1 :]
+
+    word.set_label(text)
+    if not correct:
+        global step
+        step += 1
+
+    drawing_area.queue_draw()
 
 
 reset()
