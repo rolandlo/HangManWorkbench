@@ -1,7 +1,8 @@
 import gi
 
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk
+gi.require_version("Adw", "1")
+from gi.repository import Gtk, Adw
 
 import workbench
 import math
@@ -97,6 +98,21 @@ def on_clicked(button):
         step += 1
 
     drawing_area.queue_draw()
+
+    if step == 10:
+        toast = Adw.Toast(
+            title="Du bist gehängt!!",
+            timeout=2,
+        )
+        toast.connect("dismissed", lambda _: reset())
+        overlay.add_toast(toast)
+    if "_" not in text:
+        toast = Adw.Toast(
+            title="Jippie, erraten!!",
+            timeout=2,
+        )
+        toast.connect("dismissed", lambda _: reset())
+        overlay.add_toast(toast)
 
 
 reset()
