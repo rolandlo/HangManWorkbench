@@ -1,0 +1,33 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ToastOverlay overlay {
+  Adw.StatusPage {
+    title: "Hang Man";
+    height-request: 1020;
+    width-request: 550;
+    description: "Errate das Wort, oder du wirst gehängt!";
+
+    Box {
+      orientation: vertical;
+      spacing: 24;
+
+      DrawingArea drawing_area {
+        content-width: 300;
+        content-height: 300;
+      }
+
+      Label word {
+        label: "_____";
+
+        styles [
+          "secret",
+        ]
+      }
+
+      FlowBox flow_box {
+        selection-mode: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+.secret {
+  color: @blue_1; /* Adwaita Named Color */
+  font-size: 80pt;
+  letter-spacing: 12pt;
+}
